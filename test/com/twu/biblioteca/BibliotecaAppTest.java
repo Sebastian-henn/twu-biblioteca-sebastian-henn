@@ -5,7 +5,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 
-public class ExampleTest {
+public class BibliotecaAppTest {
 
     BibliotecaApp testApp = new BibliotecaApp();
 
@@ -13,4 +13,6 @@ public class ExampleTest {
     public void testPrintWelcomeMessage() {
         assertEquals("Welcome to the Bangalore Public Library management system BIBLIOTECA!", testApp.printWelcomeMessage());
     }
+
+
 }
