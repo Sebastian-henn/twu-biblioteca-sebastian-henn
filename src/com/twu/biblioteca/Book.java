@@ -1,21 +1,35 @@
 package com.twu.biblioteca;
 
-/**
- * Created by Seb on 16/07/2015.
- */
-
-
-
 public class Book {
-    String name;
-    String author;
-    int year;
-    boolean available;
+    private String title;
+    private String author;
+    private int year;
+    private boolean available;
 
-    public Book(String n, String a, int y) {
-        name = n;
+    public Book(String t, String a, int y) {
+        title = t;
         author = a;
         year = y;
         available = true;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public boolean getAvailability() {
+        return available;
+    }
+
+    public void setAvailable(boolean a) {
+        available = a;
     }
 }

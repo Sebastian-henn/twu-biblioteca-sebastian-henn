@@ -1,18 +1,36 @@
 package com.twu.biblioteca;
 
-
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.assertEquals;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
+import static org.junit.Assert.*;
 
 public class BibliotecaAppTest {
 
-    BibliotecaApp testApp = new BibliotecaApp();
+    private BibliotecaApp testApp = new BibliotecaApp();
+    private ByteArrayOutputStream output = new ByteArrayOutputStream();
+    private ByteArrayOutputStream error = new ByteArrayOutputStream();
+
+
+    @Before
+    public void setupPrintstream() {
+        System.setOut(new PrintStream(output));
+        System.setErr(new PrintStream(error));
+    }
+
+    @After
+    public void teardownPrintStream() {
+        System.setOut(null);
+        System.setErr(null);
+    }
 
     @Test
     public void testPrintWelcomeMessage() {
-        assertEquals("Welcome to the Bangalore Public Library management system BIBLIOTECA!", testApp.printWelcomeMessage());
+        testApp.printWelcomeMessage();
+        assertEquals(HelperMessages.welcomeMessage, output.toString());
     }
-
-
 }
