@@ -81,26 +81,31 @@ public class LibrarySystem {
         while (input != 0) {
             if (sc.hasNextInt()) {
                 input = sc.nextInt();
-                switch (input) {
-                    case 1:
-                        printBooklist();
-                        break;
-                    case 2:
-                        checkoutMenu();
-                        break;
-                    case 3:
-                        returnMenu();
-                        break;
-                    case 0:
-                        //quit
-                        break;
-                    default:
-                        System.out.print(HelperMessages.invalidInput);
-                }
+                menuOptions(input);
             } else {
                 System.out.print(HelperMessages.invalidInput);
                 sc.next();
             }
         }
     }
+
+    public void menuOptions(int input) {
+        switch (input) {
+            case 1:
+                printBooklist();
+                break;
+            case 2:
+                checkoutMenu();
+                break;
+            case 3:
+                returnMenu();
+                break;
+            case 0:
+                //quit
+                break;
+            default:
+                System.out.print(HelperMessages.invalidInput);
+        }
+    }
+
 }

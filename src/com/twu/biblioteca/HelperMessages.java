@@ -1,6 +1,5 @@
 package com.twu.biblioteca;
 
-
 public class HelperMessages {
     public static String welcomeMessage = "Welcome to the Bangalore Public Library management system BIBLIOTECA!\n";
     public static String menuScreen = "\nThis is the main menu. Please select one of the following:\n" +

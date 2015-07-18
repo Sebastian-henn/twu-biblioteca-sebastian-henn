@@ -10,11 +10,9 @@ import java.io.PrintStream;
 import static org.junit.Assert.*;
 
 public class BibliotecaAppTest {
-
     private BibliotecaApp testApp = new BibliotecaApp();
     private ByteArrayOutputStream output = new ByteArrayOutputStream();
     private ByteArrayOutputStream error = new ByteArrayOutputStream();
-
 
     @Before
     public void setupPrintstream() {

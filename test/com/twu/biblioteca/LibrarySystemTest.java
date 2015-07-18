@@ -9,7 +9,6 @@ import java.io.PrintStream;
 
 import static org.junit.Assert.*;
 
-
 public class LibrarySystemTest {
     private LibrarySystem testLibrarySystem = new LibrarySystem();
     private ByteArrayOutputStream output = new ByteArrayOutputStream();
@@ -41,18 +40,41 @@ public class LibrarySystemTest {
 
     @Test
     public void testCheckoutBook() {
-        assertFalse(testLibrarySystem.checkoutBook("A book not in the library"));
         assertTrue(testLibrarySystem.checkoutBook("The Tao of Physics"));
         assertFalse(testLibrarySystem.booklist[2].getAvailability());
+    }
+
+    @Test
+    public void testCheckoutBookDoesntAcceptInvalidBooks() {
+        assertFalse(testLibrarySystem.checkoutBook("A book not in the library"));
+    }
+
+    @Test
+    public void testCheckoutBookDoesntAcceptUnavailableBooks() {
+        testLibrarySystem.booklist[2].setAvailable(false);
         assertFalse(testLibrarySystem.checkoutBook("The Tao of Physics"));
     }
 
     @Test
     public void testReturnBook() {
-        assertFalse(testLibrarySystem.returnBook("A book not in the library"));
-        assertFalse(testLibrarySystem.returnBook("Musicophilia"));
         testLibrarySystem.booklist[1].setAvailable(false);
         assertTrue(testLibrarySystem.returnBook("Musicophilia"));
         assertTrue(testLibrarySystem.booklist[1].getAvailability());
+    }
+
+    @Test
+    public void testReturnBookDoesntAcceptInvalidBooks() {
+        assertFalse(testLibrarySystem.returnBook("A book not in the library"));
+    }
+
+    @Test
+    public void testCReturnBookDoesntAcceptBooksAlreadyInLibrary() {
+        assertFalse(testLibrarySystem.returnBook("Musicophilia"));
+    }
+
+    @Test
+    public void testMenuOptionPrintsErrorIfInvalid() {
+        testLibrarySystem.menuOptions(5);
+        assertEquals(HelperMessages.invalidInput, output.toString());
     }
 }
