@@ -42,9 +42,9 @@ public class LibrarySystemTest {
     @Test
     public void testCheckoutBook() {
         assertFalse(testLibrarySystem.checkoutBook("A book not in the library"));
-        assertTrue(testLibrarySystem.checkoutBook("Musicophilia"));
-        assertFalse(testLibrarySystem.booklist[1].getAvailability());
-        assertFalse(testLibrarySystem.checkoutBook("Musicophilia"));
+        assertTrue(testLibrarySystem.checkoutBook("The Tao of Physics"));
+        assertFalse(testLibrarySystem.booklist[2].getAvailability());
+        assertFalse(testLibrarySystem.checkoutBook("The Tao of Physics"));
     }
 
     @Test

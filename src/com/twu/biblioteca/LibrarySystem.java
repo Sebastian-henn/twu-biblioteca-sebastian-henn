@@ -8,11 +8,8 @@ public class LibrarySystem {
                                new Book("Musicophilia","Oliver Sacks",2006),
                                new Book("The Tao of Physics","Fritjof Capra",1976)};
 
-
     public void LibrarySystem() {
     }
-
-
 
     public void printMenu() {
         System.out.print(HelperMessages.menuScreen);
@@ -23,7 +20,6 @@ public class LibrarySystem {
             String spacedTitle = String.format("%-30.30s",booklist[i].getTitle());
             String spacedAuthor = String.format("%-30.30s",booklist[i].getAuthor());
             String availability = (booklist[i].getAvailability()) ? "IN LIBRARY" : "OUT OF STOCK";
-
             System.out.print(String.format("%s | %s | %s | %s\n",spacedTitle,spacedAuthor,booklist[i].getYear(),availability));
         }
     }
@@ -32,7 +28,7 @@ public class LibrarySystem {
         System.out.print(HelperMessages.checkoutPrompt);
         String input;
         Scanner sc = new Scanner(System.in);
-        input = sc.next();
+        input = sc.nextLine();
         if (checkoutBook(input)) {
             System.out.print(HelperMessages.successfulCheckout);
         } else {
@@ -57,7 +53,7 @@ public class LibrarySystem {
         System.out.print(HelperMessages.returnPrompt);
         String input;
         Scanner sc = new Scanner(System.in);
-        input = sc.next();
+        input = sc.nextLine();
         if (returnBook(input)) {
             System.out.print(HelperMessages.successfulReturn);
         } else {
@@ -82,11 +78,9 @@ public class LibrarySystem {
         int input = -1;
         printMenu();
         Scanner sc = new Scanner(System.in);
-
         while (input != 0) {
-            try {
+            if (sc.hasNextInt()) {
                 input = sc.nextInt();
-                sc.nextLine();
                 switch (input) {
                     case 1:
                         printBooklist();
@@ -103,9 +97,9 @@ public class LibrarySystem {
                     default:
                         System.out.print(HelperMessages.invalidInput);
                 }
-            } catch (Exception e) {
+            } else {
                 System.out.print(HelperMessages.invalidInput);
-                setupMenu();
+                sc.next();
             }
         }
     }
