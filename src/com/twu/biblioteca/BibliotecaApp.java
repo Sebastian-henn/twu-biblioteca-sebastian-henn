@@ -2,18 +2,12 @@ package com.twu.biblioteca;
 
 public class BibliotecaApp {
 
+    static Console console = new Console();
+    static MainMenu menu = new MainMenu(console);
+
     public static void main(String[] args) {
         BibliotecaApp bibliotecaApp = new BibliotecaApp();
-        bibliotecaApp.printWelcomeMessage();
-        bibliotecaApp.menuSystem();
-    }
-
-    public void printWelcomeMessage() {
-        System.out.print(HelperMessages.welcomeMessage);
-    }
-
-    public void menuSystem() {
-        LibrarySystem lib = new LibrarySystem();
-        lib.setupMenu();
+        menu.welcomeMessage();
+        menu.run();
     }
 }
