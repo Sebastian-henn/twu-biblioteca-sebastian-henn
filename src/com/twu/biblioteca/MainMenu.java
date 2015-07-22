@@ -33,8 +33,12 @@ public class MainMenu {
     }
 
     public void printAvailableItems() {
-        HashMap<String,Item> availableItems = lib.getAvailableItems();
-        for (HashMap.Entry<String,Item> item : availableItems.entrySet()) {
+        HashMap<String,Item> availableBooks = lib.getAvailableItems("Book");
+        for (HashMap.Entry<String,Item> item : availableBooks.entrySet()) {
+            console.writeOutput(item.getValue().getInformation());
+        }
+        HashMap<String,Item> availableMovies = lib.getAvailableItems("Movie");
+        for (HashMap.Entry<String,Item> item : availableMovies.entrySet()) {
             console.writeOutput(item.getValue().getInformation());
         }
     }
@@ -52,6 +56,7 @@ public class MainMenu {
                 ReturnMenu returnMenu = new ReturnMenu(console);
                 returnMenu.returnItem(lib.getLibrary(),console.readInput());
                 break;
+
             case 0:
                 //quit
                 break;

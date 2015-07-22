@@ -10,13 +10,18 @@ public class LibraryTest {
     Library testLibrary = new Library();
 
     @Test
-    public void testConstructionCreatesThreeItems() {
-        assertEquals(testLibrary.getLibrary().size(),3);
+    public void testConstructionCreatesFiveItems() {
+        assertEquals(testLibrary.getLibrary().size(),5);
     }
 
     @Test
-    public void testConstructionCreatesThreeAvailableItems() {
-        assertEquals(testLibrary.getAvailableItems().size(),3);
+    public void testConstructionCreatesFourAvailableBooks() {
+        assertEquals(testLibrary.getAvailableItems("Book").size(),4);
+    }
+
+    @Test
+    public void testConstructionCreatesOneAvailableMovie() {
+        assertEquals(testLibrary.getAvailableItems("Movie").size(),1);
     }
 
     @Test

@@ -12,11 +12,13 @@ public class CheckoutMenuTest {
     FakeConsole fakeConsole = new FakeConsole();
     HashMap<String,Item> testLib = new HashMap<String, Item>();
     CheckoutMenu testCheckoutMenu = new CheckoutMenu(fakeConsole);
-    Book testBook = new Book("test title","test author",2000);
+    Book testBook = new Book("test book title","test author",2000);
+    Movie testMovie = new Movie("test movie title",2001,"test director",5);
 
     @Before
-    public void addBookToTestLibrary() {
-        testLib.put("test title",testBook);
+    public void addItemsToTestLibrary() {
+        testLib.put("test book title",testBook);
+        testLib.put("test movie title",testMovie);
     }
 
     @Test
@@ -26,20 +28,26 @@ public class CheckoutMenuTest {
 
     @Test
     public void testCheckoutItemDoesntAcceptItemNotInLibrary() {
-        testCheckoutMenu.checkoutItem(testLib, "book not in library");
-        assertThat(fakeConsole.getOutput(),endsWith("Sorry, that book doesn't exist in this library"));
+        testCheckoutMenu.checkoutItem(testLib, "item not in library");
+        assertThat(fakeConsole.getOutput(),endsWith("Sorry, that item doesn't exist in this library"));
     }
 
     @Test
-    public void testCheckoutItemAcceptsValidItem() {
-        testCheckoutMenu.checkoutItem(testLib, "test title");
+    public void testCheckoutItemAcceptsValidBook() {
+        testCheckoutMenu.checkoutItem(testLib, "test book title");
         assertThat(fakeConsole.getOutput(),endsWith("Thank you! Enjoy the book"));
     }
 
     @Test
+    public void testCheckoutItemAcceptsValidMovie() {
+        testCheckoutMenu.checkoutItem(testLib, "test movie title");
+        assertThat(fakeConsole.getOutput(),endsWith("Thank you! Enjoy the movie"));
+    }
+
+    @Test
     public void testCheckoutItemDoesntAcceptUnavailableItem() {
-        testLib.get("test title").checkoutItem();
-        testCheckoutMenu.checkoutItem(testLib, "test title");
+        testLib.get("test book title").checkoutItem();
+        testCheckoutMenu.checkoutItem(testLib, "test book title");
         assertThat(fakeConsole.getOutput(), endsWith("Sorry, that book is currently checked out"));
     }
 }

@@ -28,7 +28,7 @@ public class ReturnMenuTest {
     @Test
     public void testReturnItemDoesntAcceptItemNotInLibrary() {
         testReturnMenu.returnItem(testLib, "book not in library");
-        assertThat(testConsole.getOutput(),endsWith("Sorry, that book doesn't exist in this library"));
+        assertThat(testConsole.getOutput(),endsWith("Sorry, that item doesn't exist in this library"));
     }
 
     @Test
@@ -41,6 +41,6 @@ public class ReturnMenuTest {
     public void testReturnItemAcceptsValidItem() {
         testLib.get("test title").checkoutItem();
         testReturnMenu.returnItem(testLib, "test title");
-        assertThat(testConsole.getOutput(),endsWith("Thank you for returning the book."));
+        assertThat(testConsole.getOutput(),endsWith("Thank you for returning the book"));
     }
 }

@@ -12,17 +12,18 @@ public class Library {
         library.put("Musicophilia",new Book("Musicophilia","Oliver Sacks",2006));
         library.put("The Tao of Physics",new Book("The Tao of Physics","Fritjof Capra",1976));
         library.put("Nature's Blueprint",new Book("Nature's Blueprint","Dan Hooper",2008));
+        library.put("The Matrix",new Movie("The Matrix",1999,"The Wachowskis",9));
     }
 
     public HashMap<String,Item> getLibrary() {
         return library;
     }
 
-    public HashMap<String,Item> getAvailableItems()
+    public HashMap<String,Item> getAvailableItems(String itemType)
     {
         HashMap<String,Item> availableItems = new HashMap<String,Item>();
         for (HashMap.Entry<String,Item> item : library.entrySet()) {
-            if (item.getValue().getAvailable()) {
+            if (item.getValue().getAvailable() && item.getValue().getClass().getSimpleName().equals(itemType)) {
                 availableItems.put(item.getKey(),item.getValue());
             }
         }
@@ -38,13 +39,5 @@ public class Library {
             }
         }
         return checkedOutItems;
-    }
-
-    public void checkoutItemFromLibrary(String itemTitle) {
-        library.get(itemTitle).checkoutItem();
-    }
-
-    public void returnItemToLibrary(String itemTitle) {
-        library.get(itemTitle).returnItem();
     }
 }

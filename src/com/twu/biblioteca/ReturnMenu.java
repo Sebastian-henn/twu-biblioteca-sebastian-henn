@@ -13,14 +13,15 @@ public class ReturnMenu {
     public void returnItem(HashMap<String,Item> items, String itemTitle) {
         if (items.containsKey(itemTitle)){
             Item current = items.get(itemTitle);
+            String itemType = current.getClass().getSimpleName().toLowerCase();
             if (!current.getAvailable()) {
                 current.returnItem();
-                console.writeOutput("Thank you for returning the book.");
+                console.writeOutput("Thank you for returning the "+itemType);
             } else {
-                console.writeOutput("Sorry, that book is currently not checked out");
+                console.writeOutput("Sorry, that "+itemType+" is currently not checked out");
             }
         } else {
-            console.writeOutput("Sorry, that book doesn't exist in this library");
+            console.writeOutput("Sorry, that item doesn't exist in this library");
         }
     }
 
