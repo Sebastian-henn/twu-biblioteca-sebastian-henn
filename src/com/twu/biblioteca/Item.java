@@ -9,16 +9,14 @@ public abstract class Item {
         return available;
     }
 
-    public void checkoutItem() {
+    public void checkoutItem(User borrower) {
+        this.borrower = borrower;
         available = false;
     }
 
     public void returnItem() {
+        this.borrower = null;
         available = true;
-    }
-
-    public void setBorrower(User borrower) {
-        this.borrower = borrower;
     }
 
     public User getBorrower() {

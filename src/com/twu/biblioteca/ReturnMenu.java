@@ -10,13 +10,13 @@ public class ReturnMenu {
         console.writeOutput("Please type in the title of the item you wish to return:");
     }
 
-    public void returnItem(HashMap<String,Item> items, String itemTitle) {
+    public void returnItem(HashMap<String,Item> items, String itemTitle,User borrower) {
         if (items.containsKey(itemTitle)){
             Item current = items.get(itemTitle);
             String itemType = current.getClass().getSimpleName().toLowerCase();
             if (!current.getAvailable()) {
                 current.returnItem();
-                console.writeOutput("Thank you for returning the "+itemType);
+                console.writeOutput("Thank you for returning the "+itemType+", "+borrower.getName());
             } else {
                 console.writeOutput("Sorry, that "+itemType+" is currently not checked out");
             }

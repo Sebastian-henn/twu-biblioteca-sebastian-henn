@@ -7,9 +7,12 @@ import java.util.HashMap;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertEquals;
 
 public class CheckoutMenuTest {
+
     FakeConsole fakeConsole = new FakeConsole();
+    User testUser = new User("000-0000","testPassword","Test Name","test@email","1800 000 000");
     HashMap<String,Item> testLib = new HashMap<String, Item>();
     CheckoutMenu testCheckoutMenu = new CheckoutMenu(fakeConsole);
     Book testBook = new Book("test book title","test author",2000);
@@ -17,8 +20,8 @@ public class CheckoutMenuTest {
 
     @Before
     public void addItemsToTestLibrary() {
-        testLib.put("test book title",testBook);
-        testLib.put("test movie title",testMovie);
+        testLib.put(testBook.getTitle(),testBook);
+        testLib.put(testMovie.getTitle(),testMovie);
     }
 
     @Test
@@ -28,26 +31,33 @@ public class CheckoutMenuTest {
 
     @Test
     public void testCheckoutItemDoesntAcceptItemNotInLibrary() {
-        testCheckoutMenu.checkoutItem(testLib, "item not in library");
+        testCheckoutMenu.checkoutItem(testLib, "item not in library",testUser);
         assertThat(fakeConsole.getOutput(),endsWith("Sorry, that item doesn't exist in this library"));
     }
 
     @Test
     public void testCheckoutItemAcceptsValidBook() {
-        testCheckoutMenu.checkoutItem(testLib, "test book title");
-        assertThat(fakeConsole.getOutput(),endsWith("Thank you! Enjoy the book"));
+        testCheckoutMenu.checkoutItem(testLib, "test book title",testUser);
+        assertThat(fakeConsole.getOutput(),endsWith("Thank you Test Name! Enjoy the book"));
     }
 
     @Test
     public void testCheckoutItemAcceptsValidMovie() {
-        testCheckoutMenu.checkoutItem(testLib, "test movie title");
-        assertThat(fakeConsole.getOutput(),endsWith("Thank you! Enjoy the movie"));
+        testCheckoutMenu.checkoutItem(testLib, "test movie title",testUser);
+        assertThat(fakeConsole.getOutput(),endsWith("Thank you Test Name! Enjoy the movie"));
     }
 
     @Test
     public void testCheckoutItemDoesntAcceptUnavailableItem() {
-        testLib.get("test book title").checkoutItem();
-        testCheckoutMenu.checkoutItem(testLib, "test book title");
+        testLib.get("test book title").checkoutItem(testUser);
+        testCheckoutMenu.checkoutItem(testLib, "test book title",testUser);
         assertThat(fakeConsole.getOutput(), endsWith("Sorry, that book is currently checked out"));
     }
+
+    @Test
+    public void testCheckoutItemAddsUserCorrectly() {
+        testCheckoutMenu.checkoutItem(testLib, "test movie title",testUser);
+        assertEquals(testUser, testLib.get("test movie title").getBorrower());
+    }
+
 }
