@@ -15,6 +15,10 @@ public class Library {
         library.put("The Matrix",new Movie("The Matrix",1999,"The Wachowskis",9));
     }
 
+    public Library(HashMap<String,Item> library) {
+        this.library = library;
+    }
+
     public HashMap<String,Item> getLibrary() {
         return library;
     }

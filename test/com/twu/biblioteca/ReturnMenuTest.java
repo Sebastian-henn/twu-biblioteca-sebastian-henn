@@ -14,7 +14,7 @@ public class ReturnMenuTest {
     Book testBook = new Book("test title","test author",2000);
     FakeConsole testConsole = new FakeConsole();
     HashMap<String,Item> testLib = new HashMap<String, Item>();
-    ReturnMenu testReturnMenu = new ReturnMenu(testConsole);
+    ReturnMenu testReturnMenu = new ReturnMenu(testConsole,new Library(testLib),testUser);
 
 
 

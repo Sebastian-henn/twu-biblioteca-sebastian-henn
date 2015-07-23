@@ -5,24 +5,30 @@ import java.util.HashMap;
 public class MainMenu {
     IConsole console;
     User user;
+    HashMap<Integer,MenuOption> menuOptions = new HashMap<Integer, MenuOption>();
     Library lib = new Library();
 
     public MainMenu(IConsole console, User user) {
         this.console = console;
         this.user = user;
+        menuOptions.put(1,new PrintAvailableItemsMenu(console,lib));
+        menuOptions.put(2,new CheckoutMenu(console,lib,user));
+        menuOptions.put(3,new ReturnMenu(console,lib,user));
+        menuOptions.put(4, new PrintUserDetailsMenu(console, user));
     }
 
     public void welcomeMessage() {
-        console.writeOutput("Welcome to the Bangalore Public Library management system BIBLIOTECA!");
+        console.writeOutput("\nWelcome to the Bangalore Public Library management system BIBLIOTECA!");
     }
 
     public void printMenu() {
-        console.writeOutput("This is the main menu. Please select one of the following:");
-        console.writeOutput("[1] - List Items in Library");
-        console.writeOutput("[2] - Checkout an Item");
-        console.writeOutput("[3] - Return an Item");
-        console.writeOutput("[4] - Print user information");
-        console.writeOutput("[0] - Quit");
+        console.writeOutput("\nThis is the main menu. Please select one of the following:");
+        String menuText = "";
+        for (HashMap.Entry<Integer,MenuOption> option : menuOptions.entrySet()) {
+            menuText += "["+option.getKey()+"] - "+option.getValue().getNameOfOption()+"\n";
+        }
+        menuText += "[0] - Quit";
+        console.writeOutput(menuText);
     }
 
     public void run() {
@@ -31,49 +37,21 @@ public class MainMenu {
             this.printMenu();
             try {
                 selection = Integer.parseInt(console.readInput());
-                this.doMenu(selection);
+                menu(selection);
             } catch (NumberFormatException e) {
                 console.writeOutput("Please enter either [1],[2],[3], [4] or [0]");
             }
         }
     }
 
-    public String printAvailableItems(Library library, String itemType) {
-        HashMap<String,Item> availableItems = library.getAvailableItems(itemType);
-        String message;
-        if (availableItems.isEmpty()) {
-            message = "\nNo "+itemType+"s Available";
+    public void menu(int input) {
+
+
+        if (input == 0) {
+            console.writeOutput("Thankyou and goodbye!");
         } else {
-            message = "\n"+itemType+"s Available:";
+            menuOptions.get(input).runOption();
         }
-        for (HashMap.Entry<String,Item> item : availableItems.entrySet()) {
-            message += "\n"+item.getValue().getInformation();
-        }
-        return message;
     }
 
-    public void doMenu(int input) {
-        switch (input) {
-            case 1:
-                console.writeOutput(printAvailableItems(lib, "Book"));
-                console.writeOutput(printAvailableItems(lib, "Movie"));
-                break;
-            case 2:
-                CheckoutMenu checkoutMenu = new CheckoutMenu(console);
-                checkoutMenu.checkoutItem(lib.getLibrary(),console.readInput(),user);
-                break;
-            case 3:
-                ReturnMenu returnMenu = new ReturnMenu(console);
-                returnMenu.returnItem(lib.getLibrary(),console.readInput(),user);
-                break;
-            case 4:
-                console.writeOutput(user.getUserInformation());
-                break;
-            case 0:
-                //quit
-                break;
-            default:
-                console.writeOutput("Please enter either [1],[2],[3], [4] or [0]");
-        }
-    }
 }

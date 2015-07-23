@@ -2,12 +2,15 @@ package com.twu.biblioteca;
 
 import java.util.HashMap;
 
-public class ReturnMenu {
+public class ReturnMenu implements MenuOption {
     IConsole console;
+    Library lib;
+    User user;
 
-    public ReturnMenu(IConsole console) {
+    public ReturnMenu(IConsole console,Library lib,User user) {
         this.console = console;
-        console.writeOutput("Please type in the title of the item you wish to return:");
+        this.lib = lib;
+        this.user = user;
     }
 
     public void returnItem(HashMap<String,Item> items, String itemTitle,User borrower) {
@@ -16,7 +19,7 @@ public class ReturnMenu {
             String itemType = current.getClass().getSimpleName().toLowerCase();
             if (!current.getAvailable()) {
                 current.returnItem();
-                console.writeOutput("Thank you for returning the "+itemType+", "+borrower.getName());
+                console.writeOutput("Thank you for returning the " + itemType + ", " + borrower.getName());
             } else {
                 console.writeOutput("Sorry, that "+itemType+" is currently not checked out");
             }
@@ -25,6 +28,12 @@ public class ReturnMenu {
         }
     }
 
+    public void runOption() {
+        console.writeOutput("Please type in the title of the item you wish to return:");
+        returnItem(lib.getLibrary(), console.readInput(), user);
+    }
 
-
+    public String getNameOfOption() {
+        return "Return an Item";
+    }
 }
