@@ -59,5 +59,4 @@ public class CheckoutMenuTest {
         testCheckoutMenu.checkoutItem(testLib, "test movie title",testUser);
         assertEquals(testUser, testLib.get("test movie title").getBorrower());
     }
-
 }

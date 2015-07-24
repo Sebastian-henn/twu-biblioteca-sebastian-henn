@@ -1,6 +1,5 @@
 package com.twu.biblioteca;
 
-
 public class User {
     private String libraryNumber = "123-4567";
     private String password = "pw";
@@ -37,5 +36,4 @@ public class User {
     public boolean authenticatePassword(String inputPassword) {
         return (password.equals(inputPassword));
     }
-
 }

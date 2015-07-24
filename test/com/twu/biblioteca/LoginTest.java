@@ -7,16 +7,13 @@ import java.util.HashMap;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class LoginTest {
     FakeConsole testConsole = new FakeConsole();
     HashMap<String,User> testUserList = new HashMap<String, User>();
     User testUser = new User("000-0000","testPassword","Test Name","test@email","1800 000 000");
     Login testLogin;
-
 
     @Before
     public void setUp() {

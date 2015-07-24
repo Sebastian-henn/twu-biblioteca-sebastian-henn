@@ -26,6 +26,7 @@ public class PrintAvailableItemsMenu implements MenuOption {
     }
 
     public void runOption() {
+        console.writeOutput("These are the list of items available for checkout:");
         console.writeOutput(printAvailableItems(lib, "Book"));
         console.writeOutput(printAvailableItems(lib, "Movie"));
     }

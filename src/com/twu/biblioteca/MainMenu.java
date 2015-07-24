@@ -45,13 +45,10 @@ public class MainMenu {
     }
 
     public void menu(int input) {
-
-
         if (input == 0) {
             console.writeOutput("Thankyou and goodbye!");
         } else {
             menuOptions.get(input).runOption();
         }
     }
-
 }

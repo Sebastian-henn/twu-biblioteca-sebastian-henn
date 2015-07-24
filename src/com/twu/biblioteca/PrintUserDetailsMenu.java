@@ -10,11 +10,10 @@ public class PrintUserDetailsMenu implements MenuOption {
     }
 
     public void runOption() {
-        console.writeOutput(user.getUserInformation());
+        console.writeOutput("You are currently logged on as:\n"+user.getUserInformation());
     }
 
     public String getNameOfOption() {
         return "Print user information";
     }
-
 }

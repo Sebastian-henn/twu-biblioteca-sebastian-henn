@@ -25,5 +25,4 @@ public class UserTest {
                 "\nphone: 1800 000 000";
         assertEquals(expectedOutput,testUser.getUserInformation());
     }
-
 }

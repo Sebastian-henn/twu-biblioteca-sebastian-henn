@@ -1,6 +1,5 @@
 package com.twu.biblioteca;
 
-
 public abstract class Item {
     private boolean available = true;
     private User borrower = null;
@@ -24,5 +23,4 @@ public abstract class Item {
     }
 
     public abstract String getInformation();
-
 }
