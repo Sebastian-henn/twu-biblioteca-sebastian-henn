@@ -22,6 +22,7 @@ public class ReturnMenuTest {
 
     @Test
     public void testReturnMenuPrintsPrompt() {
+        testReturnMenu.runOption();
         assertThat(testConsole.getOutput(), containsString("Please type in the title of the item you wish to return:"));
     }
 

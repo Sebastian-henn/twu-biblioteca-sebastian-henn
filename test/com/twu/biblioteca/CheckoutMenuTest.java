@@ -26,6 +26,7 @@ public class CheckoutMenuTest {
 
     @Test
     public void testCheckoutMenuPrintsPrompt() {
+        testCheckoutMenu.runOption();
         assertThat(fakeConsole.getOutput(), containsString("Please type in the title of the item you wish to check out:"));
     }
 
