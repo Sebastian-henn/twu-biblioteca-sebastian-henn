@@ -43,4 +43,33 @@ public class Library {
         }
         return checkedOutItems;
     }
+    public void checkoutAnItem(IConsole console, String itemName, User borrower) {
+        if (!library.containsKey(itemName)) {
+            console.writeOutput("Sorry, that item doesn't exist in this library");
+        } else {
+            Item current = library.get(itemName);
+            String itemType = current.getClass().getSimpleName().toLowerCase();
+            if (current.getAvailable()) {
+                current.checkoutItem(borrower);
+                console.writeOutput("Thank you " + borrower.getName() + "! Enjoy the " + itemType);
+            } else {
+                console.writeOutput("Sorry, that " + itemType + " is currently checked out");
+            }
+        }
+    }
+
+    public void returnAnItem(IConsole console, String itemName, User borrower) {
+        if (!library.containsKey(itemName)) {
+            console.writeOutput("Sorry, that item doesn't exist in this library");
+        } else {
+            Item current = library.get(itemName);
+            String itemType = current.getClass().getSimpleName().toLowerCase();
+            if (!current.getAvailable()) {
+                current.returnItem();
+                console.writeOutput("Thank you for returning the " + itemType + ", " + borrower.getName());
+            } else {
+                console.writeOutput("Sorry, that "+itemType+" is currently not checked out");
+            }
+        }
+    }
 }

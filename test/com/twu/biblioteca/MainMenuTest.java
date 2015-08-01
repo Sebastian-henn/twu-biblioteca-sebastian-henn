@@ -2,6 +2,8 @@ package com.twu.biblioteca;
 
 import org.junit.Test;
 
+import java.util.HashMap;
+
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.endsWith;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -20,13 +22,15 @@ public class MainMenuTest {
     @Test
     public void printMenuPrintsCorrectly() {
         testMenu.printMenu();
-        assertThat(testConsole.getOutput(),endsWith("[0] - Quit"));
+        for (HashMap.Entry<Integer,MenuOption> option : testMenu.menuOptions.entrySet()) {
+            assertThat(testConsole.getOutput(),containsString(option.getValue().getNameOfOption()));
+        }
     }
 
     @Test
     public void menuWithInputZeroQuits() {
         testMenu.menu(0);
-        assertThat(testConsole.getOutput(), endsWith("Thankyou and goodbye!"));
+        assertThat(testConsole.getOutput(), endsWith("Thankyou "+testUser.getName()+", please come again soon"));
     }
 
     @Test

@@ -29,35 +29,4 @@ public class CheckoutMenuTest {
         testCheckoutMenu.runOption();
         assertThat(fakeConsole.getOutput(), containsString("Please type in the title of the item you wish to check out:"));
     }
-
-    @Test
-    public void testCheckoutItemDoesntAcceptItemNotInLibrary() {
-        testCheckoutMenu.checkoutItem(testLib, "item not in library",testUser);
-        assertThat(fakeConsole.getOutput(),endsWith("Sorry, that item doesn't exist in this library"));
-    }
-
-    @Test
-    public void testCheckoutItemAcceptsValidBook() {
-        testCheckoutMenu.checkoutItem(testLib, "test book title",testUser);
-        assertThat(fakeConsole.getOutput(),endsWith("Thank you Test Name! Enjoy the book"));
-    }
-
-    @Test
-    public void testCheckoutItemAcceptsValidMovie() {
-        testCheckoutMenu.checkoutItem(testLib, "test movie title",testUser);
-        assertThat(fakeConsole.getOutput(),endsWith("Thank you Test Name! Enjoy the movie"));
-    }
-
-    @Test
-    public void testCheckoutItemDoesntAcceptUnavailableItem() {
-        testLib.get("test book title").checkoutItem(testUser);
-        testCheckoutMenu.checkoutItem(testLib, "test book title",testUser);
-        assertThat(fakeConsole.getOutput(), endsWith("Sorry, that book is currently checked out"));
-    }
-
-    @Test
-    public void testCheckoutItemAddsUserCorrectly() {
-        testCheckoutMenu.checkoutItem(testLib, "test movie title",testUser);
-        assertEquals(testUser, testLib.get("test movie title").getBorrower());
-    }
 }

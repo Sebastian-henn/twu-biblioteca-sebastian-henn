@@ -25,30 +25,4 @@ public class ReturnMenuTest {
         testReturnMenu.runOption();
         assertThat(testConsole.getOutput(), containsString("Please type in the title of the item you wish to return:"));
     }
-
-    @Test
-    public void testReturnItemDoesntAcceptItemNotInLibrary() {
-        testReturnMenu.returnItem(testLib, "book not in library",testUser);
-        assertThat(testConsole.getOutput(),endsWith("Sorry, that item doesn't exist in this library"));
-    }
-
-    @Test
-    public void testReturnItemDoesntAcceptItemThatsAvailable() {
-        testReturnMenu.returnItem(testLib, "test title",testUser);
-        assertThat(testConsole.getOutput(),endsWith("Sorry, that book is currently not checked out"));
-    }
-
-    @Test
-    public void testReturnItemAcceptsValidItem() {
-        testLib.get("test title").checkoutItem(testUser);
-        testReturnMenu.returnItem(testLib, "test title",testUser);
-        assertThat(testConsole.getOutput(),endsWith("Thank you for returning the book, Test Name"));
-    }
-
-    @Test
-    public void testReturnItemClearsUserAfterSuccessfulReturn() {
-        testLib.get("test title").checkoutItem(testUser);
-        testReturnMenu.returnItem(testLib, "test title", testUser);
-        assertEquals(null,testLib.get("test title").getBorrower());
-    }
 }

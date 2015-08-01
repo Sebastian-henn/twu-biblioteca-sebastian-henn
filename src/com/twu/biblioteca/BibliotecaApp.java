@@ -4,12 +4,11 @@ import java.util.HashMap;
 
 public class BibliotecaApp {
 
-    static Console console = new Console();
     static HashMap<String,User> userList = new HashMap<String, User>();
 
-    public static void main(String[] args) {
+    public static void runApplication(IConsole console) {
         User testUser = new User();
-        userList.put(testUser.getLibraryNumber(),testUser);
+        userList.put(testUser.getLibraryNumber(),new User());
 
         Login login = new Login(console,userList);
         User currentUser = null;
@@ -22,5 +21,9 @@ public class BibliotecaApp {
         MainMenu menu = new MainMenu(console,currentUser);
         menu.welcomeMessage();
         menu.run();
+    }
+
+    public static void main(String[] args) {
+        runApplication(new Console());
     }
 }

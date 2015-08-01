@@ -15,20 +15,20 @@ public class MainMenu {
         menuOptions.put(2,new CheckoutMenu(console,lib,user));
         menuOptions.put(3,new ReturnMenu(console,lib,user));
         menuOptions.put(4, new PrintUserDetailsMenu(console, user));
+        menuOptions.put(0,new QuitMenu(console,user));
     }
 
     public void welcomeMessage() {
-        console.writeOutput("\nWelcome to the Bangalore Public Library management system BIBLIOTECA!");
+        console.writeOutput("Welcome to the Bangalore Public Library management system BIBLIOTECA!");
     }
 
     public void printMenu() {
-        console.writeOutput("\nThis is the main menu. Please select one of the following:");
+        console.writeOutput("This is the main menu. Please select one of the following:");
         String menuText = "";
         for (HashMap.Entry<Integer,MenuOption> option : menuOptions.entrySet()) {
             menuText += "["+option.getKey()+"] - "+option.getValue().getNameOfOption()+"\n";
         }
-        menuText += "[0] - Quit";
-        console.writeOutput(menuText);
+        console.writeOutput(menuText.trim());
     }
 
     public void run() {
@@ -39,16 +39,16 @@ public class MainMenu {
                 selection = Integer.parseInt(console.readInput());
                 menu(selection);
             } catch (NumberFormatException e) {
-                console.writeOutput("Please enter either [1],[2],[3], [4] or [0]");
+                String keys = "";
+                for (HashMap.Entry<Integer,MenuOption> option : menuOptions.entrySet()) {
+                    keys += "["+option.getKey()+"] ";
+                }
+                console.writeOutput("Please enter one of the following: "+keys);
             }
         }
     }
 
     public void menu(int input) {
-        if (input == 0) {
-            console.writeOutput("Thankyou and goodbye!");
-        } else {
-            menuOptions.get(input).runOption();
-        }
+        menuOptions.get(input).runOption();
     }
 }

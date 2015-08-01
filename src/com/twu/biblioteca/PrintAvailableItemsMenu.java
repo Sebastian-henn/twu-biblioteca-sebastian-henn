@@ -15,12 +15,12 @@ public class PrintAvailableItemsMenu implements MenuOption {
         HashMap<String,Item> availableItems = library.getAvailableItems(itemType);
         String message;
         if (availableItems.isEmpty()) {
-            message = "\nNo "+itemType+"s Available";
+            message = "No "+itemType+"s Available";
         } else {
-            message = "\n"+itemType+"s Available:";
+            message = itemType+"s Available:";
         }
         for (HashMap.Entry<String,Item> item : availableItems.entrySet()) {
-            message += "\n"+item.getValue().getInformation();
+            message += "\n   "+item.getValue().getInformation();
         }
         return message;
     }
